@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+#Apple 
+.DS_Store
+
+#hidden folders
+data/
+notes/
