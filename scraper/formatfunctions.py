@@ -26,3 +26,6 @@ def name_formatter(df):
     numbers = df['name'].apply(lambda x: 999 if x=="Team" else x[1:(x.find(" "))])
     df['name'] = df['name'].apply(lambda x: 999 if x=="Team" else x[1:(x.find(" "))]) 
     df.insert(loc=2, column="number", value=numbers)
+
+
+#Testcases
