@@ -1,6 +1,7 @@
+from tokenize import String
 import pandas as pd
 
-def fill_box_na(df):
+def fill_box_na(df: pd.DataFrame):
     #defining default values
     na_team = "undefined"
     na_min = "00:00"
@@ -22,10 +23,30 @@ def fill_box_na(df):
     df['EFs'] = df['EFs'].fillna(na_float)
 
 
-def name_formatter(df):
+def name_formatter(df: pd.DataFrame):
     numbers = df['name'].apply(lambda x: 999 if x=="Team" else x[1:(x.find(" "))])
     df['name'] = df['name'].apply(lambda x: 999 if x=="Team" else x[1:(x.find(" "))]) 
     df.insert(loc=2, column="number", value=numbers)
+
+def quota_formatter(df: pd.DataFrame, c_name: String):
+    #getting the position of the column in question
+    pos = df.columns.get_loc(c_name)
+
+    #setting up the new column names
+    new_names = [c_name[:-1]+"_P",c_name[:-1]+"_A", c_name[:-1]+"_R"]
+
+    #extracting the data
+    data = []
+    data.append(df[c_name].apply(lambda x : int(x.split(" - ")[0])))
+    data.append(df[c_name].apply(lambda x : int(x.split(" - ")[1])))
+    data.append(df[c_name].apply(lambda x : float(x.split(" - ")[2][:-1])/100))
+
+    #inserting new columns
+    for i in reversed(range(3)):
+        df.insert(loc=pos, column=new_names[i], value=data[i])
+
+    #dropping old column
+    df.drop(columns=[c_name], inplace=True)
 
 
 #Testcases
