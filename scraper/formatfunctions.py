@@ -25,7 +25,7 @@ def fill_box_na(df: pd.DataFrame):
 
 def name_formatter(df: pd.DataFrame):
     numbers = df['name'].apply(lambda x: 999 if x=="Team" else x[1:(x.find(" "))])
-    df['name'] = df['name'].apply(lambda x: 999 if x=="Team" else x[1:(x.find(" "))]) 
+    df['name'] = df['name'].apply(lambda x: "Team" if x=="Team" else x[(x.find(" ")):])  
     df.insert(loc=2, column="number", value=numbers)
 
 def quota_formatter(df: pd.DataFrame, c_name: String):
