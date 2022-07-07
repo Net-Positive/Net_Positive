@@ -34,8 +34,16 @@
         <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='boxscores' table='[public].[boxscores]' type='table' />
         <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
           <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='boxscores' table='[public].[boxscores]' type='table' />
-          <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='matchdays' table='[public].[matchdays]' type='table' />
-          <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='rosters' table='[public].[rosters]' type='table' />
+          <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='matchdays' table='[public].[matchdays]' type='table'>
+            <columns>
+              <column datatype='date' date-parse-format='dd.MM.yyyy' name='date' />
+            </columns>
+          </relation>
+          <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='rosters' table='[public].[rosters]' type='table'>
+            <columns>
+              <column datatype='date' date-parse-format='dd.MM.yyyy' name='birthdate' />
+            </columns>
+          </relation>
         </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
         <cols>
           <map key='[2P_A]' value='[boxscores].[2P_A]' />
@@ -773,8 +781,8 @@
       <column caption='minutes' datatype='real' name='[Calculation_1572530379505938443]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='[sec]/60' />
       </column>
-      <column caption='points_max' datatype='real' name='[Calculation_1572530379511250956]' role='measure' type='ordinal'>
-        <calculation class='tableau' formula='{ FIXED [Ps]:MAX([Ps])}' />
+      <column caption='AGE' datatype='integer' name='[Calculation_1572530379521433616]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='DATEDIFF(&apos;year&apos;,[date],[birthdate])' />
       </column>
       <column caption='E Fs' datatype='real' name='[EFs]' role='measure' type='quantitative' />
       <column caption='Fg A' datatype='integer' name='[FG_A]' role='measure' type='quantitative' />
@@ -789,8 +797,8 @@
       <_.fcp.ObjectModelTableType.true...column caption='boxscores' datatype='table' name='[__tableau_internal_object_id__].[boxscores_DE388973D3534D8C908DCF1D340D7544]' role='measure' type='quantitative' />
       <_.fcp.ObjectModelTableType.true...column caption='matchdays' datatype='table' name='[__tableau_internal_object_id__].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]' role='measure' type='quantitative' />
       <_.fcp.ObjectModelTableType.true...column caption='rosters' datatype='table' name='[__tableau_internal_object_id__].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]' role='measure' type='quantitative' />
-      <column caption='Birthdate' datatype='string' name='[birthdate]' role='dimension' type='nominal' />
-      <column caption='Date' datatype='string' name='[date]' role='dimension' type='nominal' />
+      <column caption='Birthdate' datatype='date' datatype-customized='true' name='[birthdate]' role='dimension' type='ordinal' />
+      <column caption='Date' datatype='date' datatype-customized='true' name='[date]' role='dimension' type='ordinal' />
       <column caption='Guest' datatype='string' name='[guest]' role='dimension' type='nominal' />
       <column caption='Guest Points' datatype='integer' name='[guest_points]' role='measure' type='quantitative' />
       <column caption='Height' datatype='string' name='[height]' role='dimension' type='nominal' />
@@ -830,8 +838,16 @@
           <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='boxscores_DE388973D3534D8C908DCF1D340D7544' table='[Extract].[boxscores_DE388973D3534D8C908DCF1D340D7544]' type='table' />
           <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
             <relation name='boxscores_DE388973D3534D8C908DCF1D340D7544' table='[Extract].[boxscores_DE388973D3534D8C908DCF1D340D7544]' type='table' />
-            <relation name='matchdays_744A2A0BEC5841DDB401AA55902CC7EE' table='[Extract].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]' type='table' />
-            <relation name='rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB' table='[Extract].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]' type='table' />
+            <relation name='matchdays_744A2A0BEC5841DDB401AA55902CC7EE' table='[Extract].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]' type='table'>
+              <columns>
+                <column datatype='date' date-parse-format='dd.MM.yyyy' name='date' />
+              </columns>
+            </relation>
+            <relation name='rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB' table='[Extract].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]' type='table'>
+              <columns>
+                <column datatype='date' date-parse-format='dd.MM.yyyy' name='birthdate' />
+              </columns>
+            </relation>
           </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
           <cols>
             <map key='[2P_A]' value='[boxscores_DE388973D3534D8C908DCF1D340D7544].[2P_A]' />
@@ -1296,15 +1312,14 @@
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>date</remote-name>
-              <remote-type>129</remote-type>
+              <remote-type>7</remote-type>
               <local-name>[date]</local-name>
               <parent-name>[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]</parent-name>
               <remote-alias>date</remote-alias>
               <ordinal>29</ordinal>
               <family>matchdays</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>580</approx-count>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
               <contains-null>true</contains-null>
               <collation flag='0' name='LEN_RUS' />
               <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
@@ -1443,15 +1458,14 @@
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>birthdate</remote-name>
-              <remote-type>129</remote-type>
+              <remote-type>7</remote-type>
               <local-name>[birthdate]</local-name>
               <parent-name>[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]</parent-name>
               <remote-alias>birthdate</remote-alias>
               <ordinal>39</ordinal>
               <family>rosters</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>926</approx-count>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
               <contains-null>true</contains-null>
               <collation flag='0' name='LEN_RUS' />
               <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
@@ -1573,18 +1587,34 @@
           </object>
           <object caption='matchdays' id='matchdays_744A2A0BEC5841DDB401AA55902CC7EE'>
             <properties context=''>
-              <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='matchdays' table='[public].[matchdays]' type='table' />
+              <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='matchdays' table='[public].[matchdays]' type='table'>
+                <columns>
+                  <column datatype='date' date-parse-format='dd.MM.yyyy' name='date' />
+                </columns>
+              </relation>
             </properties>
             <properties context='extract'>
-              <relation name='matchdays_744A2A0BEC5841DDB401AA55902CC7EE' table='[Extract].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]' type='table' />
+              <relation name='matchdays_744A2A0BEC5841DDB401AA55902CC7EE' table='[Extract].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]' type='table'>
+                <columns>
+                  <column datatype='date' date-parse-format='dd.MM.yyyy' name='date' />
+                </columns>
+              </relation>
             </properties>
           </object>
           <object caption='rosters' id='rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB'>
             <properties context=''>
-              <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='rosters' table='[public].[rosters]' type='table' />
+              <relation connection='postgres.1d5mkww0defm901c242hq0xqlriv' name='rosters' table='[public].[rosters]' type='table'>
+                <columns>
+                  <column datatype='date' date-parse-format='dd.MM.yyyy' name='birthdate' />
+                </columns>
+              </relation>
             </properties>
             <properties context='extract'>
-              <relation name='rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB' table='[Extract].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]' type='table' />
+              <relation name='rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB' table='[Extract].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]' type='table'>
+                <columns>
+                  <column datatype='date' date-parse-format='dd.MM.yyyy' name='birthdate' />
+                </columns>
+              </relation>
             </properties>
           </object>
         </objects>
@@ -1916,6 +1946,61 @@
       </table>
       <simple-id uuid='{4C05C8BE-BC32-400A-B06E-AA66780776DF}' />
     </worksheet>
+    <worksheet name='Sheet 16'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='boxscores+ (postgres)' name='federated.0135hbp1ka76y61eneg2o1yjrdip' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0135hbp1ka76y61eneg2o1yjrdip'>
+            <column datatype='real' name='[Ps]' role='measure' type='quantitative' />
+            <column-instance column='[Ps]' derivation='Avg' name='[avg:Ps:qk]' pivot='key' type='quantitative' />
+            <column caption='Birthdate' datatype='date' datatype-customized='true' name='[birthdate]' role='dimension' type='ordinal' />
+            <column caption='Date' datatype='date' datatype-customized='true' name='[date]' role='dimension' type='ordinal' />
+            <column-instance column='[birthdate]' derivation='Year' name='[yr:birthdate:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[date]' derivation='Year' name='[yr:date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Ps:qk]</rows>
+        <cols>([federated.0135hbp1ka76y61eneg2o1yjrdip].[yr:date:ok] / [federated.0135hbp1ka76y61eneg2o1yjrdip].[yr:birthdate:ok])</cols>
+      </table>
+      <simple-id uuid='{35825260-AF6E-459C-BE81-6DA00D3EB431}' />
+    </worksheet>
+    <worksheet name='Sheet 17'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{AAF63CD6-7177-4F0F-8C8C-C48536FE2228}' />
+    </worksheet>
     <worksheet name='Shooting overview per position'>
       <table>
         <view>
@@ -2212,6 +2297,7 @@
               <calculation class='tableau' formula='[sec]/60' />
             </column>
             <column-instance column='[number]' derivation='None' name='[none:number:nk]' pivot='key' type='nominal' />
+            <column-instance column='[sec]' derivation='None' name='[none:sec:qk]' pivot='key' type='quantitative' />
             <column caption='Number' datatype='string' name='[number]' role='dimension' type='nominal' />
             <column caption='Sec' datatype='integer' name='[sec]' role='measure' type='quantitative' />
             <column-instance column='[Calculation_1572530379505938443]' derivation='Sum' name='[sum:Calculation_1572530379505938443:qk]' pivot='key' type='quantitative' />
@@ -2220,8 +2306,13 @@
           <filter class='categorical' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:number:nk]'>
             <groupfilter from='&quot;0&quot;' function='range' level='[none:number:nk]' to='&quot;99&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
+          <filter class='quantitative' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:sec:qk]' included-values='in-range'>
+            <min>1</min>
+            <max>3184</max>
+          </filter>
           <slices>
             <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:number:nk]</column>
+            <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:sec:qk]</column>
           </slices>
           <aggregation value='false' />
         </view>
@@ -2960,7 +3051,7 @@
       </cards>
       <simple-id uuid='{FC5B05C2-2163-4C41-822D-5A7A008D6456}' />
     </window>
-    <window class='worksheet' maximized='true' name='effective field goal percentage'>
+    <window class='worksheet' name='effective field goal percentage'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3028,6 +3119,52 @@
         </edge>
       </cards>
       <simple-id uuid='{4361FA24-7015-4B76-9E9B-C8ACEFFF4916}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 16'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{875D90DD-AB62-4AB2-8AED-8D2DA23AF35F}' />
+    </window>
+    <window class='worksheet' name='Sheet 17'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{210EDD9A-26CA-4104-8590-8EC9E1EFA39B}' />
     </window>
   </windows>
 </workbook>
