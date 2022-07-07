@@ -58,5 +58,5 @@ SELECT AVG("3P_R")* 100 AS three_point_percentage
 FROM boxscores AS b
 WHERE "3P_A" > 0
 AND "matchId" BETWEEN 108000 AND 108999;
---GROUP BY team
+
 --32,11
