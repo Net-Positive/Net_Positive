@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-<!-- build 20221.22.0516.1720                               -->
-<workbook original-version='18.1' source-build='2022.1.2 (20221.22.0516.1720)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+<!-- build 20221.22.0611.0333                               -->
+<workbook original-version='18.1' source-build='2022.1.3 (20221.22.0611.0333)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <document-format-change-manifest>
+    <_.fcp.AccessibleZoneTabOrder.true...AccessibleZoneTabOrder />
     <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
     <IntuitiveSorting />
     <IntuitiveSorting_SP2 />
     <_.fcp.MarkAnimation.true...MarkAnimation />
@@ -11,9 +13,11 @@
     <_.fcp.ObjectModelExtractV2.true...ObjectModelExtractV2 />
     <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
     <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SetMembershipControl />
     <SheetIdentifierTracking />
     <SortTagCleanup />
     <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
   </document-format-change-manifest>
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
@@ -784,8 +788,8 @@
       <column caption='free_throw_percentage' datatype='real' name='[Calculation_1572530379537653779]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='[FT_R]*100' />
       </column>
-      <column caption='total_data_points' datatype='integer' name='[Calculation_1572530380839501845]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='(25*COUNT([__tableau_internal_object_id__].[boxscores_DE388973D3534D8C908DCF1D340D7544]))+(8*COUNT([__tableau_internal_object_id__].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]))+(8*COUNT([__tableau_internal_object_id__].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]))' />
+      <column caption='effective field goal with free throws' datatype='real' name='[Calculation_3904620932024414208]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='([3P_P]*1.5+[2P_P]+[FT_P]+0.5)/([FG_A]+[FT_A])' />
       </column>
       <column caption='E Fs' datatype='real' name='[EFs]' role='measure' type='quantitative' />
       <column caption='Fg A' datatype='integer' name='[FG_A]' role='measure' type='quantitative' />
@@ -837,7 +841,7 @@
       <column-instance column='[Calculation_1572530379428294659]' derivation='User' name='[usr:Calculation_1572530379428294659:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Calculation_1572530379432898564]' derivation='User' name='[usr:Calculation_1572530379432898564:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Calculation_1572530379533840401]' derivation='User' name='[usr:Calculation_1572530379533840401:qk]' pivot='key' type='quantitative' />
-      <extract _.fcp.ObjectModelExtractV2.true...object-id='' count='-1' enabled='true' units='records'>
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' count='-1' enabled='false' units='records'>
         <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/Datasources/NET POSTIVE (postgres).hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='07/07/2022 08:37:27 AM' username='tableau_internal_user'>
           <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='boxscores_DE388973D3534D8C908DCF1D340D7544' table='[Extract].[boxscores_DE388973D3534D8C908DCF1D340D7544]' type='table' />
           <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
@@ -1635,9 +1639,15 @@
             <second-end-point object-id='matchdays_744A2A0BEC5841DDB401AA55902CC7EE' />
           </relationship>
           <relationship>
-            <expression op='='>
-              <expression op='[name]' />
-              <expression op='[name (rosters)]' />
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[name]' />
+                <expression op='[name (rosters)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[team]' />
+                <expression op='[team (rosters)]' />
+              </expression>
             </expression>
             <first-end-point object-id='boxscores_DE388973D3534D8C908DCF1D340D7544' />
             <second-end-point object-id='rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB' />
@@ -1929,17 +1939,13 @@
       </table>
       <simple-id uuid='{E8523AFC-DE39-44D1-95BF-D6833F743A1D}' />
     </worksheet>
-    <worksheet name='Data Source Infos'>
+    <worksheet name='DATA overview'>
       <table>
         <view>
           <datasources>
             <datasource caption='boxscores+ (postgres)' name='federated.0135hbp1ka76y61eneg2o1yjrdip' />
           </datasources>
           <datasource-dependencies datasource='federated.0135hbp1ka76y61eneg2o1yjrdip'>
-            <column caption='total_data_points' datatype='integer' name='[Calculation_1572530380839501845]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='(25*COUNT([__tableau_internal_object_id__].[boxscores_DE388973D3534D8C908DCF1D340D7544]))+(8*COUNT([__tableau_internal_object_id__].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]))+(8*COUNT([__tableau_internal_object_id__].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]))' />
-            </column>
-            <_.fcp.ObjectModelTableType.true...column caption='boxscores' datatype='table' name='[__tableau_internal_object_id__].[boxscores_DE388973D3534D8C908DCF1D340D7544]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:matchdays_744A2A0BEC5841DDB401AA55902CC7EE:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.false...column caption='matchdays' datatype='integer' name='[__tableau_internal_object_id__].[matchdays_744A2A0BEC5841DDB401AA55902CC7EE]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB:qk]' pivot='key' type='quantitative' />
@@ -1948,25 +1954,26 @@
             <_.fcp.ObjectModelTableType.true...column caption='rosters' datatype='table' name='[__tableau_internal_object_id__].[rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB]' role='measure' type='quantitative' />
             <column-instance column='[name (rosters)]' derivation='CountD' name='[ctd:name (rosters):qk]' pivot='key' type='quantitative' />
             <column-instance column='[name]' derivation='CountD' name='[ctd:name:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[team]' derivation='CountD' name='[ctd:team:qk]' pivot='key' type='quantitative' />
             <column caption='Name (Rosters)' datatype='string' name='[name (rosters)]' role='dimension' type='nominal' />
             <column caption='Name' datatype='string' name='[name]' role='dimension' type='nominal' />
-            <column-instance column='[Calculation_1572530380839501845]' derivation='User' name='[usr:Calculation_1572530380839501845:qk]' pivot='key' type='quantitative' />
+            <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]'>
             <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:name:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:name (rosters):qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:team:qk]&quot;' />
               <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[__tableau_internal_object_id__].[cnt:matchdays_744A2A0BEC5841DDB401AA55902CC7EE:qk]&quot;' />
               <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[__tableau_internal_object_id__].[cnt:rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB:qk]&quot;' />
-              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:name (rosters):qk]&quot;' />
-              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:name:qk]&quot;' />
-              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530380839501845:qk]&quot;' />
             </groupfilter>
           </filter>
           <manual-sort column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' direction='ASC'>
             <dictionary>
+              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:name:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:team:qk]&quot;</bucket>
               <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[__tableau_internal_object_id__].[cnt:matchdays_744A2A0BEC5841DDB401AA55902CC7EE:qk]&quot;</bucket>
               <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[__tableau_internal_object_id__].[cnt:rosters_BE5F1C1E14B64E4D80C5F4EB0F7EF7CB:qk]&quot;</bucket>
-              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:name (rosters):qk]&quot;</bucket>
-              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[ctd:name:qk]&quot;</bucket>
             </dictionary>
           </manual-sort>
           <slices>
@@ -1976,11 +1983,11 @@
         </view>
         <style />
         <panes>
-          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Text' />
+            <mark class='Automatic' />
             <encodings>
               <text column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[Multiple Values]' />
             </encodings>
@@ -1994,7 +2001,7 @@
         <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]</rows>
         <cols />
       </table>
-      <simple-id uuid='{F169926A-DFBC-4997-A404-2EC8243FD498}' />
+      <simple-id uuid='{F040B0A2-325C-4456-AFBF-DD973C56D3C2}' />
     </worksheet>
     <worksheet name='Homecourt Advantage'>
       <table>
@@ -2078,7 +2085,7 @@
       </table>
       <simple-id uuid='{9359D7D7-BAB1-4F6C-A6EF-C09D577E1487}' />
     </worksheet>
-    <worksheet name='Points per game increasing'>
+    <worksheet name='Points per game  and field goal attemptsincreasing'>
       <table>
         <view>
           <datasources>
@@ -2088,21 +2095,44 @@
             <column caption='points per game' datatype='real' name='[Calculation_1572530379293409281]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='SUM(Ps)/COUNTD ([matchId])' />
             </column>
+            <column caption='Field goal attempts per game' datatype='real' name='[Calculation_1572530379428294659]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(FG_A)/COUNTD(matchId)' />
+            </column>
+            <column caption='Fg A' datatype='integer' name='[FG_A]' role='measure' type='quantitative' />
             <column datatype='real' name='[Ps]' role='measure' type='quantitative' />
             <column caption='Match Id' datatype='integer' name='[matchId]' role='dimension' type='ordinal' />
             <column-instance column='[season]' derivation='None' name='[none:season:nk]' pivot='key' type='nominal' />
             <column caption='Season' datatype='string' datatype-customized='true' name='[season]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1572530379293409281]' derivation='User' name='[usr:Calculation_1572530379293409281:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1572530379428294659]' derivation='User' name='[usr:Calculation_1572530379428294659:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379428294659:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379293409281:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379428294659:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379293409281:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style />
         <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
             <mark class='Line' />
+            <encodings>
+              <color column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' />
+            </encodings>
             <style>
               <style-rule element='mark'>
                 <format attr='mark-labels-show' value='true' />
@@ -2111,7 +2141,7 @@
             </style>
           </pane>
         </panes>
-        <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379293409281:qk]</rows>
+        <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[Multiple Values]</rows>
         <cols>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:season:nk]</cols>
       </table>
       <simple-id uuid='{4C05C8BE-BC32-400A-B06E-AA66780776DF}' />
@@ -2191,77 +2221,6 @@
       </table>
       <simple-id uuid='{F5AFCDFF-60C7-423A-A2C3-8A080822A121}' />
     </worksheet>
-    <worksheet name='Sheet 20'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='boxscores+ (postgres)' name='federated.0135hbp1ka76y61eneg2o1yjrdip' />
-          </datasources>
-          <datasource-dependencies datasource='federated.0135hbp1ka76y61eneg2o1yjrdip'>
-            <column caption='2p P' datatype='integer' name='[2P_P]' role='measure' type='quantitative' />
-            <column caption='3p P' datatype='integer' name='[3P_P]' role='measure' type='quantitative' />
-            <column caption='effective field goal percentage' datatype='real' name='[Calculation_1572530379501105162]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='([3P_P]*1.5+[2P_P])/([FG_A])' />
-            </column>
-            <column caption='Fg A' datatype='integer' name='[FG_A]' role='measure' type='quantitative' />
-            <column-instance column='[Calculation_1572530379501105162]' derivation='Avg' name='[avg:Calculation_1572530379501105162:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[FG_A]' derivation='None' name='[none:FG_A:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[position]' derivation='None' name='[none:position:nk]' pivot='key' type='nominal' />
-            <column caption='Position' datatype='string' name='[position]' role='dimension' type='nominal' />
-          </datasource-dependencies>
-          <filter class='quantitative' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:FG_A:qk]' included-values='in-range'>
-            <min>1</min>
-            <max>27</max>
-          </filter>
-          <filter class='categorical' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]'>
-            <groupfilter from='&quot;C&quot;' function='range' level='[none:position:nk]' to='&quot;SG&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
-          <slices>
-            <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]</column>
-            <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:FG_A:qk]</column>
-          </slices>
-          <aggregation value='true' />
-        </view>
-        <style />
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-        </panes>
-        <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379501105162:qk]</rows>
-        <cols>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]</cols>
-      </table>
-      <simple-id uuid='{EB51C828-3458-495B-B5AC-59E21E775D00}' />
-    </worksheet>
-    <worksheet name='Sheet 22'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='boxscores+ (postgres)' name='federated.0135hbp1ka76y61eneg2o1yjrdip' />
-          </datasources>
-          <datasource-dependencies datasource='federated.0135hbp1ka76y61eneg2o1yjrdip'>
-            <column datatype='real' name='[Ps]' role='measure' type='quantitative' />
-            <column-instance column='[Ps]' derivation='Count' name='[cnt:Ps:qk]' pivot='key' type='quantitative' />
-          </datasource-dependencies>
-          <aggregation value='true' />
-        </view>
-        <style />
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-        </panes>
-        <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[cnt:Ps:qk]</rows>
-        <cols />
-      </table>
-      <simple-id uuid='{DFBA00A6-D03F-4BA2-AD71-DCE32FB8DD81}' />
-    </worksheet>
     <worksheet name='Shooting overview per position'>
       <table>
         <view>
@@ -2293,13 +2252,13 @@
             <column caption='Fg A' datatype='integer' name='[FG_A]' role='measure' type='quantitative' />
             <column caption='Ft A' datatype='integer' name='[FT_A]' role='measure' type='quantitative' />
             <column caption='Ft R' datatype='real' name='[FT_R]' role='measure' type='quantitative' />
-            <column-instance column='[Calculation_1572530379433754630]' derivation='Avg' name='[avg:Calculation_1572530379433754630:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1572530379537653779]' derivation='Avg' name='[avg:Calculation_1572530379537653779:qk]' pivot='key' type='quantitative' />
             <column caption='Match Id' datatype='integer' name='[matchId]' role='dimension' type='ordinal' />
             <column-instance column='[position]' derivation='None' name='[none:position:nk]' pivot='key' type='nominal' />
             <column-instance column='[sec]' derivation='None' name='[none:sec:qk]' pivot='key' type='quantitative' />
             <column caption='Position' datatype='string' name='[position]' role='dimension' type='nominal' />
             <column caption='Sec' datatype='integer' name='[sec]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1572530379433754630]' derivation='Sum' name='[sum:Calculation_1572530379433754630:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1572530379428294659]' derivation='User' name='[usr:Calculation_1572530379428294659:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1572530379432898564]' derivation='User' name='[usr:Calculation_1572530379432898564:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1572530379533840401]' derivation='User' name='[usr:Calculation_1572530379533840401:qk]' pivot='key' type='quantitative' />
@@ -2338,7 +2297,7 @@
             </view>
             <mark class='Automatic' />
           </pane>
-          <pane id='3' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk]'>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_1572530379433754630:qk]'>
             <view>
               <breakdown value='auto' />
             </view>
@@ -2363,7 +2322,7 @@
             <mark class='Automatic' />
           </pane>
         </panes>
-        <rows>([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379428294659:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379432898564:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379533840401:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379534323730:qk] + [federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379537653779:qk])))))</rows>
+        <rows>([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379428294659:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379432898564:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_1572530379433754630:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379533840401:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379534323730:qk] + [federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379537653779:qk])))))</rows>
         <cols>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]</cols>
       </table>
       <simple-id uuid='{6565F7AE-0668-49B9-99C0-E9407E2CEAD1}' />
@@ -2380,11 +2339,17 @@
             <column caption='effective field goal percentage' datatype='real' name='[Calculation_1572530379501105162]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='([3P_P]*1.5+[2P_P])/([FG_A])' />
             </column>
+            <column caption='effective field goal with free throws' datatype='real' name='[Calculation_3904620932024414208]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='([3P_P]*1.5+[2P_P]+[FT_P]+0.5)/([FG_A]+[FT_A])' />
+            </column>
             <column caption='Fg A' datatype='integer' name='[FG_A]' role='measure' type='quantitative' />
+            <column caption='Ft A' datatype='integer' name='[FT_A]' role='measure' type='quantitative' />
+            <column caption='Ft P' datatype='integer' name='[FT_P]' role='measure' type='quantitative' />
             <column-instance column='[FG_A]' derivation='None' name='[none:FG_A:qk]' pivot='key' type='quantitative' />
             <column-instance column='[sec]' derivation='None' name='[none:sec:qk]' pivot='key' type='quantitative' />
             <column caption='Sec' datatype='integer' name='[sec]' role='measure' type='quantitative' />
             <column-instance column='[Calculation_1572530379501105162]' derivation='Sum' name='[sum:Calculation_1572530379501105162:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_3904620932024414208]' derivation='Sum' name='[sum:Calculation_3904620932024414208:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
           <filter class='quantitative' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:FG_A:qk]' included-values='in-range'>
             <min>1</min>
@@ -2408,6 +2373,29 @@
             </view>
             <mark class='Circle' />
             <reference-line axis-column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_1572530379501105162:qk]' boxplot-mark-exclusion='true' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline0' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_1572530379501105162:qk]' z-order='1' />
+            <reference-line axis-column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_3904620932024414208:qk]' boxplot-mark-exclusion='true' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline1' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_3904620932024414208:qk]' z-order='2' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.25' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_1572530379501105162:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.25' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_3904620932024414208:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
             <style>
               <style-rule element='mark'>
                 <format attr='size' value='0.25' />
@@ -2415,7 +2403,7 @@
             </style>
           </pane>
         </panes>
-        <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_1572530379501105162:qk]</rows>
+        <rows>([federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_1572530379501105162:qk] + [federated.0135hbp1ka76y61eneg2o1yjrdip].[sum:Calculation_3904620932024414208:qk])</rows>
         <cols />
       </table>
       <simple-id uuid='{9A829BE8-90AF-47D2-AC99-45C310F26B51}' />
@@ -2561,7 +2549,7 @@
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Line' />
+            <mark class='Automatic' />
             <style>
               <style-rule element='mark'>
                 <format attr='mark-labels-show' value='true' />
@@ -2692,10 +2680,19 @@
             <column caption='Season' datatype='string' datatype-customized='true' name='[season]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1572530379432898564]' derivation='User' name='[usr:Calculation_1572530379432898564:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
+          <manual-sort column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379432898564:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
           <filter class='quantitative' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:3P_A:qk]' included-values='in-range'>
             <min>1</min>
             <max>18</max>
           </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:season:nk]' direction='ASC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk]' shelf='columns' />
+          </shelf-sorts>
           <slices>
             <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:3P_A:qk]</column>
           </slices>
@@ -2705,6 +2702,7 @@
           <style-rule element='axis'>
             <encoding attr='space' class='0' field='[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk]' field-type='quantitative' fold='true' max='35.25083142073202' min='23.0' range-type='fixed' scope='rows' type='space' />
             <encoding attr='space' class='0' field='[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379432898564:qk]' field-type='quantitative' max='55.047468093865788' min='35.0' range-type='fixed' scope='rows' type='space' />
+            <format attr='height' field='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:season:nk]' value='79' />
           </style-rule>
         </style>
         <panes>
@@ -2718,8 +2716,8 @@
             </encodings>
             <style>
               <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
                 <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
               </style-rule>
             </style>
           </pane>
@@ -2733,8 +2731,8 @@
             </encodings>
             <style>
               <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
                 <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
               </style-rule>
             </style>
           </pane>
@@ -2748,8 +2746,8 @@
             </encodings>
             <style>
               <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
                 <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
               </style-rule>
             </style>
           </pane>
@@ -2758,6 +2756,96 @@
         <cols>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:season:nk]</cols>
       </table>
       <simple-id uuid='{1ACFD1E5-E9B1-4093-B3E8-4A26B62681FB}' />
+    </worksheet>
+    <worksheet name='more threes per game and higher 3 point percentage (2)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='boxscores+ (postgres)' name='federated.0135hbp1ka76y61eneg2o1yjrdip' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0135hbp1ka76y61eneg2o1yjrdip'>
+            <column caption='3p A' datatype='integer' name='[3P_A]' role='measure' type='quantitative' />
+            <column caption='3p R' datatype='real' name='[3P_R]' role='measure' type='quantitative' />
+            <column caption='threes_attempts per game' datatype='real' name='[Calculation_1572530379432898564]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([3P_A])/COUNTD([matchId])' />
+            </column>
+            <column caption='three point percentage' datatype='real' name='[Calculation_1572530379433754630]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[3P_R]*100' />
+            </column>
+            <column-instance column='[Calculation_1572530379433754630]' derivation='Avg' name='[avg:Calculation_1572530379433754630:qk]' pivot='key' type='quantitative' />
+            <column caption='Match Id' datatype='integer' name='[matchId]' role='dimension' type='ordinal' />
+            <column-instance column='[3P_A]' derivation='None' name='[none:3P_A:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[season]' derivation='None' name='[none:season:nk]' pivot='key' type='nominal' />
+            <column caption='Season' datatype='string' datatype-customized='true' name='[season]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_1572530379432898564]' derivation='User' name='[usr:Calculation_1572530379432898564:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:3P_A:qk]' included-values='in-range'>
+            <min>1</min>
+            <max>18</max>
+          </filter>
+          <slices>
+            <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:3P_A:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk]' field-type='quantitative' fold='true' max='35.25083142073202' min='23.0' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379432898564:qk]' field-type='quantitative' max='55.047468093865788' min='35.0' range-type='fixed' scope='rows' type='space' />
+            <format attr='height' field='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:season:nk]' value='79' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379432898564:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0135hbp1ka76y61eneg2o1yjrdip].[usr:Calculation_1572530379432898564:qk] + [federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk])</rows>
+        <cols>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:season:nk]</cols>
+      </table>
+      <simple-id uuid='{2890483E-5009-4606-8798-0295EF48F28B}' />
     </worksheet>
     <worksheet name='stat overveiw per position'>
       <table>
@@ -2918,7 +3006,12 @@
             <column caption='effective field goal percentage' datatype='real' name='[Calculation_1572530379501105162]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='([3P_P]*1.5+[2P_P])/([FG_A])' />
             </column>
+            <column caption='effective field goal with free throws' datatype='real' name='[Calculation_3904620932024414208]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='([3P_P]*1.5+[2P_P]+[FT_P]+0.5)/([FG_A]+[FT_A])' />
+            </column>
             <column caption='Fg A' datatype='integer' name='[FG_A]' role='measure' type='quantitative' />
+            <column caption='Ft A' datatype='integer' name='[FT_A]' role='measure' type='quantitative' />
+            <column caption='Ft P' datatype='integer' name='[FT_P]' role='measure' type='quantitative' />
             <column datatype='real' name='[Ps]' role='measure' type='quantitative' />
             <column datatype='integer' name='[Rs]' role='measure' type='quantitative' />
             <column caption='S Ts' datatype='real' name='[STs]' role='measure' type='quantitative' />
@@ -2927,6 +3020,7 @@
             <column-instance column='[BLs]' derivation='Avg' name='[avg:BLs:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1572530379498283017]' derivation='Avg' name='[avg:Calculation_1572530379498283017:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1572530379501105162]' derivation='Avg' name='[avg:Calculation_1572530379501105162:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_3904620932024414208]' derivation='Avg' name='[avg:Calculation_3904620932024414208:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Ps]' derivation='Avg' name='[avg:Ps:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Rs]' derivation='Avg' name='[avg:Rs:qk]' pivot='key' type='quantitative' />
             <column-instance column='[STs]' derivation='Avg' name='[avg:STs:qk]' pivot='key' type='quantitative' />
@@ -2950,11 +3044,7 @@
           </slices>
           <aggregation value='true' />
         </view>
-        <style>
-          <style-rule element='axis'>
-            <format attr='height' field='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]' value='19' />
-          </style-rule>
-        </style>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -3076,59 +3166,110 @@
               </style-rule>
             </style>
           </pane>
-        </panes>
-        <rows>([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:As:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Ps:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:sec:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Rs:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:TOs:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:BLs:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379501105162:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379498283017:qk] + [federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:STs:qk]))))))))</rows>
-        <cols>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]</cols>
-      </table>
-      <simple-id uuid='{B39AD544-BD64-4D69-8AC4-368D6D96811D}' />
-    </worksheet>
-    <worksheet name='three point percentage per position'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='boxscores+ (postgres)' name='federated.0135hbp1ka76y61eneg2o1yjrdip' />
-          </datasources>
-          <datasource-dependencies datasource='federated.0135hbp1ka76y61eneg2o1yjrdip'>
-            <column caption='3p A' datatype='integer' name='[3P_A]' role='measure' type='quantitative' />
-            <column caption='3p R' datatype='real' name='[3P_R]' role='measure' type='quantitative' />
-            <column caption='three point percentage' datatype='real' name='[Calculation_1572530379433754630]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='[3P_R]*100' />
-            </column>
-            <column-instance column='[Calculation_1572530379433754630]' derivation='Avg' name='[avg:Calculation_1572530379433754630:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[3P_A]' derivation='None' name='[none:3P_A:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[position]' derivation='None' name='[none:position:nk]' pivot='key' type='nominal' />
-            <column caption='Position' datatype='string' name='[position]' role='dimension' type='nominal' />
-          </datasource-dependencies>
-          <filter class='quantitative' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:3P_A:qk]' included-values='in-range'>
-            <min>1</min>
-            <max>18</max>
-          </filter>
-          <filter class='categorical' column='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]'>
-            <groupfilter from='&quot;C&quot;' function='range' level='[none:position:nk]' to='&quot;SG&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
-          <slices>
-            <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]</column>
-            <column>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:3P_A:qk]</column>
-          </slices>
-          <aggregation value='true' />
-        </view>
-        <style />
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
+          <pane id='10' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_3904620932024414208:qk]'>
             <view>
               <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
-        <rows>[federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379433754630:qk]</rows>
+        <rows>([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:As:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Ps:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:sec:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Rs:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:TOs:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:BLs:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379501105162:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_1572530379498283017:qk] + ([federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:STs:qk] + [federated.0135hbp1ka76y61eneg2o1yjrdip].[avg:Calculation_3904620932024414208:qk])))))))))</rows>
         <cols>[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]</cols>
       </table>
-      <simple-id uuid='{B3FF703F-7A63-406D-AD84-9215824CB1EC}' />
+      <simple-id uuid='{B39AD544-BD64-4D69-8AC4-368D6D96811D}' />
     </worksheet>
   </worksheets>
+  <dashboards>
+    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Dashboard 1'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='7' param='horz' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='98000' id='5' type-v2='layout-basic' w='82400' x='800' y='1000'>
+              <zone h='49000' id='3' name='Points per game  and field goal attemptsincreasing' w='82400' x='800' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='49000' id='9' name='more threes per game and higher 3 point percentage' w='82400' x='800' y='50000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+            <zone fixed-size='160' h='98000' id='6' is-fixed='true' param='vert' type-v2='layout-flow' w='16000' x='83200' y='1000' />
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='7250' id='8' name='Points per game  and field goal attemptsincreasing' pane-specification-id='1' param='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' type-v2='color' w='19200' x='56500' y='2875' />
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='13' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='12' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone fixed-size='280' h='49000' id='3' is-fixed='true' name='Points per game  and field goal attemptsincreasing' w='82400' x='800' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='7250' id='8' name='Points per game  and field goal attemptsincreasing' pane-specification-id='1' param='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' type-v2='color' w='19200' x='56500' y='2875'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='49000' id='9' is-fixed='true' name='more threes per game and higher 3 point percentage' w='82400' x='800' y='50000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{59BFB99E-18FE-4A19-9B07-48D2125E5F39}' />
+    </dashboard>
+  </dashboards>
   <windows source-height='30'>
-    <window class='worksheet' maximized='true' name='Homecourt advantage'>
+    <window class='worksheet' name='Homecourt advantage'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3157,13 +3298,14 @@
       </cards>
       <simple-id uuid='{B6A3D123-FFD6-45B6-81DB-CB95D5A62260}' />
     </window>
-    <window class='worksheet' name='Points per game increasing'>
+    <window class='worksheet' name='Points per game  and field goal attemptsincreasing'>
       <cards>
         <edge name='left'>
           <strip size='160'>
             <card type='pages' />
             <card type='filters' />
             <card type='marks' />
+            <card type='measures' />
           </strip>
         </edge>
         <edge name='top'>
@@ -3175,6 +3317,11 @@
           </strip>
           <strip size='31'>
             <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' type='color' />
           </strip>
         </edge>
       </cards>
@@ -3258,6 +3405,34 @@
         </edge>
       </cards>
       <simple-id uuid='{AD1F2EC2-E15D-44DA-96BF-6CC77AA23696}' />
+    </window>
+    <window class='worksheet' name='more threes per game and higher 3 point percentage (2)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.0135hbp1ka76y61eneg2o1yjrdip].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{645B1F43-8472-4248-B106-743598F8CAE9}' />
     </window>
     <window class='worksheet' name='Homecourt Advantage'>
       <cards>
@@ -3388,62 +3563,6 @@
         </edge>
       </cards>
       <simple-id uuid='{F96409B3-0DC8-4253-9C0A-7860DB72B274}' />
-    </window>
-    <window class='worksheet' name='three point percentage per position'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card param='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]' type='filter' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{0B70DC68-54B0-4FCD-B621-C42E2FE498B5}' />
-    </window>
-    <window class='worksheet' name='Sheet 20'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card param='[federated.0135hbp1ka76y61eneg2o1yjrdip].[none:position:nk]' type='filter' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{62B91F38-3348-44EC-B0F8-358D1FE63DC9}' />
     </window>
     <window class='worksheet' name='Boxplots1'>
       <cards>
@@ -3629,7 +3748,19 @@
       </cards>
       <simple-id uuid='{CC1EE1F1-AE06-4117-AB7C-FDB225A5B0AC}' />
     </window>
-    <window class='worksheet' name='Data Source Infos'>
+    <window class='dashboard' name='Dashboard 1'>
+      <viewpoints>
+        <viewpoint name='Points per game  and field goal attemptsincreasing'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='more threes per game and higher 3 point percentage'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='9' />
+      <simple-id uuid='{9D3EE197-739A-45D3-9448-EB4A3100F4A3}' />
+    </window>
+    <window class='worksheet' maximized='true' name='DATA overview'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3651,30 +3782,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{D388E815-D246-4F39-AA4C-EA3904AB5872}' />
-    </window>
-    <window class='worksheet' name='Sheet 22'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{7FEC957C-8B7F-49A4-AF26-F22CC5F289C9}' />
+      <simple-id uuid='{04435D27-4566-407F-BB09-0186284C0D12}' />
     </window>
   </windows>
 </workbook>

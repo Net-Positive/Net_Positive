@@ -76,8 +76,10 @@ SELECT SUM("3P_A") AS total_threes,
 FROM boxscores AS b 
 WHERE "matchId" BETWEEN 108000 AND 108999;
 
-#15.639, 297 games, 51,75 threes per game
-
+--#15.639, 297 games, 51,75 threes per game
+SELECT SUM("Ps")/COUNT(DISTINCT "matchId") AS Points_per_game
+FROM boxscores AS b 
+WHERE "matchId" BETWEEN 108000 AND 108999;
 # Attempts per game per team
 
 SELECT SUM("3P_A") AS total_threes, 

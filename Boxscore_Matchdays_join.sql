@@ -7,6 +7,7 @@ FULL JOIN matchdays AS m
 SELECT COUNT(*)
 FROM matchdays AS m 
 WHERE home_points > guest_points;
+
  
 SELECT COUNT(*)
 FROM matchdays AS m 
@@ -79,15 +80,37 @@ AND "3P_A" > 0
 AND season = 'Saison_2019_2020'
 AND team = home;
 -- average three point percentag for a home team loosing at home 26.9%
-SELECT AVG("3P_R")
+SELECT AVG("3P_R"), 
+       team
 FROM boxscores AS b 
 FULL JOIN matchdays AS m 
 	 ON b."matchId" = m.id
 WHERE home_points < guest_points
 AND "3P_A" > 0
 AND season = 'Saison_2019_2020'
-AND team = guest;
+AND team = guest
+GROUP BY team;
 --average three point percentage for a road team winning on the road 34.08 %
 
---
+-- same for fouls
+SELECT AVG("Fs")
+FROM boxscores AS b 
+FULL JOIN matchdays AS m 
+	 ON b."matchId" = m.id
+WHERE home_points < guest_points
+AND sec > 0
+AND team = home;
+--2,18 fouls per player per home team , when home team lost
+
+SELECT AVG("Fs")
+FROM boxscores AS b 
+FULL JOIN matchdays AS m 
+	 ON b."matchId" = m.id
+WHERE home_points < guest_points
+AND sec > 0
+AND team = guest;
+--2,08 fouls per player per guest team , when home team lost so less fouls for winning teEAM
+
+-- FOULS  when home team wins
+
 
