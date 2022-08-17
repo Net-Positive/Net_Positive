@@ -4,3 +4,4 @@ Final project at the Data Analytics Bootcamp of **[neuefische](https://www.neuef
 
 
 Development of a grade (score) for basketball players based on public available stats of the 2nd Division of the German Basketball League from 2014 to today. Using these stats do explain match outcomes, identify synergies in teams and make player scores more comparable.
+
