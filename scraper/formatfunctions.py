@@ -1,7 +1,12 @@
 from tokenize import String
 import pandas as pd
 
+
 def fill_box_na(df: pd.DataFrame):
+    """
+    Fill NA values in a given boxscore dataframe
+    """
+
     #defining default values
     na_team = "undefined"
     na_min = "00:00"
@@ -24,16 +29,27 @@ def fill_box_na(df: pd.DataFrame):
 
 
 def name_formatter(df: pd.DataFrame):
+    """
+    creates a number and name for teamaction-rows in a boxscore dataframe
+    """
+
     numbers = df['name'].apply(lambda x: 999 if x=="Team" else x[1:(x.find(" "))])
     df['name'] = df['name'].apply(lambda x: "Team" if x=="Team" else x[(x.find(" "))+1:])  
     df.insert(loc=2, column="number", value=numbers)
 
 def min_to_sec(df: pd.DataFrame):
+    """
+    reformats the content of the minutes column(e.g. "3:56") in seconds (e.g. "236")
+    """
     seconds = df['min'].apply(lambda x :  (int(x.split(":")[0])*60) +int(x.split(":")[1]))
     df.insert(loc=df.columns.get_loc('min'), column="sec",  value=seconds)
     df.drop(columns=['min'], inplace=True)
 
 def quota_formatter(df: pd.DataFrame, c_name: String):
+    """
+    Reformats values in the "Succesful- Attempts - Relative"-Format into three seperate columns
+    The relative column is further reshaped from a %-value to a decimal value
+    """
     #getting the position of the column in question
     pos = df.columns.get_loc(c_name)
 
@@ -54,6 +70,10 @@ def quota_formatter(df: pd.DataFrame, c_name: String):
     df.drop(columns=[c_name], inplace=True)
 
 def rebound_formatter(df : pd.DataFrame):
+    """
+    Reformats the Rebounds column of a given boxscore dataframe so that it only contains
+    the total number of rebounds
+    """
     df['Rs'] = df['Rs'].apply(lambda x : int(x.split(" - ")[2]) if len(x) > 3 else int(x))
 
 #Testcases
