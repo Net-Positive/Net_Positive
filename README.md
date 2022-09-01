@@ -29,3 +29,7 @@ Finally we measured the reliability of our score model by comparing it to the al
 
 ## Outlook
 
+The next steps include:
+* the development of a team based score
+* the development of a score prediction algorithm
+* further analysis of upcoming matches and different leagues
